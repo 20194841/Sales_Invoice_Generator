@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package View;
 
 import javax.swing.*;
@@ -18,8 +15,8 @@ public class GUI {
         //Creating Objects
         JFrame frame = new JFrame("Sales Invoice Generator");
         JPanel panel = new JPanel();
-        JPanel Right_panel = new JPanel(); 
-        JPanel Left_panel = new JPanel();
+        JPanel RightPanel = new JPanel(); 
+        JPanel LeftPanel = new JPanel();
         JMenuBar menu = new JMenuBar();
         JToolBar toolbar = new JToolBar();
         //toolbar.setRollover(true);
@@ -36,12 +33,12 @@ public class GUI {
         
 
         //labels declaration
-        JLabel Left_label = new JLabel("Invoice Table");
-        JLabel Right_label_1 = new JLabel("Invoice Number");
-        JLabel Right_label_1_1 = new JLabel("23");
-        JLabel Right_label_2 = new JLabel("Invoice Date");
-        JLabel Right_label_3 = new JLabel("Customer Name");
-        JLabel Right_label_4 = new JLabel("Invoice Items");
+        JLabel LeftLabel = new JLabel("Invoice Table");
+        JLabel RightLabel_1 = new JLabel("Invoice Number");
+        JLabel RightLabel_1_1 = new JLabel("23");
+        JLabel RightLabel_2 = new JLabel("Invoice Date");
+        JLabel RightLabel_3 = new JLabel("Customer Name");
+        JLabel RightLabel_4 = new JLabel("Invoice Items");
 
         //Button declaration 
         JButton creat = new JButton("Create New Invoice");
@@ -59,42 +56,42 @@ public class GUI {
     JScrollPane sp=new JScrollPane(Table);    */
         
       
-        Right_panel.setLayout(new GridLayout(0,2));
-        Left_panel.setLayout(new BorderLayout());
-        Left_panel.setBorder(BorderFactory.createLineBorder(Color.black));
-        Right_panel.setBorder(BorderFactory.createLineBorder(Color.black));
+        RightPanel.setLayout(new GridLayout(0,2));
+        LeftPanel.setLayout(new BorderLayout());
+        LeftPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        RightPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
 
 
       
 
-        //Left_panel.setLayout(new GridLayout(6, 2));
+        //LeftPanel.setLayout(new GridLayout(6, 2));
         //Add componants to the panels 
-        Right_panel.add(Right_label_1); // Components Added using Flow Layout
-        Right_panel.add(Right_label_1_1);
-        Right_panel.add(Right_label_2);
-        Right_panel.add(Text1);
-        Right_panel.add(Right_label_3);
-        Right_panel.add(Text2);
-        Right_panel.add(save);
-        Right_panel.add(cancel);
+        RightPanel.add(RightLabel_1); // Components Added using Flow Layout
+        RightPanel.add(RightLabel_1_1);
+        RightPanel.add(RightLabel_2);
+        RightPanel.add(Text1);
+        RightPanel.add(RightLabel_3);
+        RightPanel.add(Text2);
+        RightPanel.add(save);
+        RightPanel.add(cancel);
         
-        Left_panel.add(Left_label); // Components Added using Flow Layout
-        Left_panel.add(creat);
-        Left_panel.add(delete);
+        LeftPanel.add(LeftLabel); // Components Added using Flow Layout
+        LeftPanel.add(creat);
+        LeftPanel.add(delete);
 
         
         panel.setLayout(new GridLayout(1,2));
-        panel.add(Left_panel);
+        panel.add(LeftPanel);
         //panel.add
-        panel.add(Right_panel);
+        panel.add(RightPanel);
         
         //Adding Components to the frame.
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 600);
-        Left_panel.add(BorderLayout.NORTH, Left_label);
-        Left_panel.add(BorderLayout.SOUTH, creat);
-        Left_panel.add(BorderLayout.SOUTH, delete);
+        LeftPanel.add(BorderLayout.NORTH, LeftLabel);
+        LeftPanel.add(BorderLayout.SOUTH, creat);
+        LeftPanel.add(BorderLayout.SOUTH, delete);
         frame.getContentPane().add(BorderLayout.NORTH, toolbar);
         frame.getContentPane().add(panel);
         frame.setVisible(true);
