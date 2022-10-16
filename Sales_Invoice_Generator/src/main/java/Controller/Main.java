@@ -1,9 +1,9 @@
+package Controller;
 
-package z_Test_Package;
+import View.GUI;
 
-public class Sales_Invoice_Generator {
-
-    public static void main(String[] args) {
+public class Main {
+     public static void main(String[] args) {
         GUI Frame = new GUI();
         Frame.Main_Frame();
         System.out.println("Hello World!");
