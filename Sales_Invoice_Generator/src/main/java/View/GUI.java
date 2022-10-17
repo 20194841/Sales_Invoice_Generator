@@ -1,14 +1,19 @@
 
 package View;
 
+import Model.FileOperations;
+import Model.InvoiceHeader;
 import javax.swing.*;
 import java.awt.*;
 
 public class GUI {
     public void Main_Frame(){
-        //Table data diclaration and initialaization
+        InvoiceHeader IH = new InvoiceHeader();
+        FileOperations FO = new FileOperations();
+        FO.readFile();
+        
         String HeaderColumn[]={"NO.","DATE","NAME","TOTAL"};
-        String HeaderData[][]={ {"101","Amit","670000","670000"},{"102","Jai","780000","670000"},{"101","Sachin","700000","670000"}};                           
+        String HeaderData[][]={ {"kk","OJ","670000","670000"},{"102","Jai","780000","670000"},{"101","Sachin","700000","670000"}};                           
         String LineColumn[]={"NO.","ITEM NAME","ITEM PRICE","COUNT","ITEM TOTAL"};  
         String LineData[][]={ {"101","Amit","670000","Amit","670000"},{"102","Jai","780000","Amit","670000"},{"101","Sachin","700000","Amit","670000"}};                           
           
