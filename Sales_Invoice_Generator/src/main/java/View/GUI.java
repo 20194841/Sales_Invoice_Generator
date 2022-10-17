@@ -17,11 +17,16 @@ public class GUI {
         JPanel panel = new JPanel();
         JPanel RightPanel = new JPanel(); 
         JPanel LeftPanel = new JPanel();
+        JPanel RightTop = new JPanel();
+        JPanel RightCenter = new JPanel();
+        JPanel RightSouth = new JPanel();
+        JPanel LeftCenter = new JPanel();
+        JPanel LeftSouth = new JPanel();
+
+
         JMenuBar menu = new JMenuBar();
         JToolBar toolbar = new JToolBar();
-        //toolbar.setRollover(true);
-        //JPanel X = new JPanel(new GridLayout(1,2,3,3));
-        
+       
         //Creating the MenuBar
         JMenu m1 = new JMenu("FILE");
         menu.add(m1);
@@ -30,68 +35,83 @@ public class GUI {
         m1.add(menu_button_1);
         m1.add(menu_button_2);
         toolbar.add(menu);
-        
-
-        //labels declaration
+    
+        //labels declaration and initialaization
         JLabel LeftLabel = new JLabel("Invoice Table");
         JLabel RightLabel_1 = new JLabel("Invoice Number");
         JLabel RightLabel_1_1 = new JLabel("23");
         JLabel RightLabel_2 = new JLabel("Invoice Date");
+        JLabel RightLabel_2_1 = new JLabel("10/10/2020");
         JLabel RightLabel_3 = new JLabel("Customer Name");
+        JLabel RightLabel_3_1 = new JLabel("Mohamed Elbadri");
         JLabel RightLabel_4 = new JLabel("Invoice Items");
+        //Separators declaration 
+        JLabel NewLine_1 = new JLabel(" ");
+        JLabel NewLine_2 = new JLabel(" ");
+        JLabel NewLine_3 = new JLabel(" ");
+        JLabel NewLine_4 = new JLabel(" ");
+        JLabel NewLine_5 = new JLabel(" ");
+        JLabel NewLine_6 = new JLabel(" ");
+        JLabel NewLine_7 = new JLabel(" ");
+        JLabel NewLine_8 = new JLabel(" ");
 
-        //Button declaration 
+
+        //Button declaration and initialaization
         JButton creat = new JButton("Create New Invoice");
         JButton delete = new JButton("Delet Invoice");       
         JButton save = new JButton("Save");
         JButton cancel = new JButton("Cancel");
         
-        //Text field declaration 
-        JTextField Text1 = new JTextField(20);
-        JTextField Text2 = new JTextField(20);      
-        
-            
-    /*JTable Table=new JTable(data,column);    
-    Table.setBounds(30,40,200,300);          
-    JScrollPane sp=new JScrollPane(Table);    */
-        
-      
-        RightPanel.setLayout(new GridLayout(0,2));
+        //Main panel declaration and initialization
+        panel.setLayout(new GridLayout(1,2));
+        panel.add(LeftPanel);
+        panel.add(RightPanel);      
+               
+        //Set Layout of the panels
+        RightPanel.setLayout(new BorderLayout());
         LeftPanel.setLayout(new BorderLayout());
+        LeftSouth.setLayout(new FlowLayout());
+        RightSouth.setLayout(new FlowLayout());
+        RightTop.setLayout(new GridLayout(8,2));
+
+        //Set border to the panels
         LeftPanel.setBorder(BorderFactory.createLineBorder(Color.black));
         RightPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
-
-
-      
-
-        //LeftPanel.setLayout(new GridLayout(6, 2));
-        //Add componants to the panels 
-        RightPanel.add(RightLabel_1); // Components Added using Flow Layout
-        RightPanel.add(RightLabel_1_1);
-        RightPanel.add(RightLabel_2);
-        RightPanel.add(Text1);
-        RightPanel.add(RightLabel_3);
-        RightPanel.add(Text2);
-        RightPanel.add(save);
-        RightPanel.add(cancel);
+        //Components Added using Flow Layout
+        RightTop.add(RightLabel_1); 
+        RightTop.add(RightLabel_1_1);
+        RightTop.add(NewLine_1);            //separator
+        RightTop.add(NewLine_2);            //separator
+        RightTop.add(RightLabel_2);
+        RightTop.add(RightLabel_2_1);
+        RightTop.add(NewLine_3);            //separator
+        RightTop.add(NewLine_4);            //separator
+        RightTop.add(RightLabel_3);
+        RightTop.add(RightLabel_3_1);
+        RightTop.add(NewLine_5);            //separator
+        RightTop.add(NewLine_6);            //separator 
+        RightTop.add(NewLine_7);            //separator
+        RightTop.add(NewLine_8);            //separator 
+        RightTop.add(RightLabel_4);
+        RightSouth.add(save);
+        RightSouth.add(cancel);
         
-        LeftPanel.add(LeftLabel); // Components Added using Flow Layout
-        LeftPanel.add(creat);
-        LeftPanel.add(delete);
+        // Components Added using Flow Layout
+        LeftSouth.add(creat);
+        LeftSouth.add(delete);
 
+        // Add componants to the panel
+        RightPanel.add(BorderLayout.NORTH, RightTop);
+        RightPanel.add(BorderLayout.CENTER,RightCenter);
+        RightPanel.add(BorderLayout.SOUTH, RightSouth);
+        LeftPanel.add(BorderLayout.NORTH, LeftLabel);
+        LeftPanel.add(BorderLayout.CENTER,LeftCenter);
+        LeftPanel.add(BorderLayout.SOUTH, LeftSouth);
         
-        panel.setLayout(new GridLayout(1,2));
-        panel.add(LeftPanel);
-        //panel.add
-        panel.add(RightPanel);
-        
-        //Adding Components to the frame.
+        //frame declaration
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 600);
-        LeftPanel.add(BorderLayout.NORTH, LeftLabel);
-        LeftPanel.add(BorderLayout.SOUTH, creat);
-        LeftPanel.add(BorderLayout.SOUTH, delete);
         frame.getContentPane().add(BorderLayout.NORTH, toolbar);
         frame.getContentPane().add(panel);
         frame.setVisible(true);
