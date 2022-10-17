@@ -6,44 +6,36 @@ public class InvoiceLine {
     private String ItemName;
     private double ItemPrice;
     private int Quantity;
-
-    public void setItemPrice(double itemPrice) {
-        ItemPrice = itemPrice;
-    }
-
-    public Double getItemFullPrice() {
-        return Quantity * ItemPrice;
-    }
+    private double Total;
 
     public int getInvoiceNumber() {
         return InvoiceNumber;
     }
-
-    public void setInvoiceNumber(int Number) {
-        InvoiceNumber = Number;
+    public void setInvoiceNumber(int InvoiceNumber) {
+        this.InvoiceNumber = InvoiceNumber;
     }
-
     public String getItemName() {
         return ItemName;
     }
-
-    public void setItemName(String Name) {
-        ItemName = Name;
+    public void setItemName(String ItemName) {
+        this.ItemName = ItemName;
     }
-
-    public Double getItemPrice() {
+    public double getItemPrice() {
         return ItemPrice;
     }
-
-    public void setItemPrice(Double Price) {
-        ItemPrice = Price;
+    public void setItemPrice(double ItemPrice) {
+        this.ItemPrice = ItemPrice;
     }
-
     public int getQuantity() {
         return Quantity;
     }
-
-    public void setQuantity(int quantity) {
-        Quantity = quantity;
+    public void setQuantity(int Quantity) {
+        this.Quantity = Quantity;
+    }
+    public double getTotal() {
+        return Total;
+    }
+    public void setTotal(double Total) {
+        this.Total = Quantity*ItemPrice;
     }
 }
