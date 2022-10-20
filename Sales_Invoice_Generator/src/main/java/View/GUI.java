@@ -1,19 +1,20 @@
 
 package View;
 
+import Controller.ActionHandeler;
 import Model.FileOperations;
 import Model.InvoiceHeader;
 import Model.InvoiceLine;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 public class GUI {
     public void Main_Frame(){
         InvoiceHeader IH = new InvoiceHeader();
-        FileOperations FO = new FileOperations();
-        FO.readFile();
+        
         ArrayList<InvoiceHeader> IHL = new ArrayList<InvoiceHeader>();
         ArrayList<InvoiceLine> ILL = new ArrayList<InvoiceLine>();
 
@@ -65,9 +66,9 @@ public class GUI {
 
         //Button declaration and initialaization
         JButton creat = new JButton("Create New Invoice");
-        JButton delete = new JButton("Delet Invoice");       
+        JButton delete = new JButton("Delete Invoice");       
         JButton save = new JButton("Add New Item");
-        JButton cancel = new JButton("Delet Item");
+        JButton cancel = new JButton("Delete Item");
         
         //Table initialaization
         HeaderTable.setModel(new DefaultTableModel(
@@ -136,6 +137,12 @@ public class GUI {
         LeftPanel.add(BorderLayout.NORTH, LeftLabel);
         LeftPanel.add(BorderLayout.CENTER,LeftCenter);
         LeftPanel.add(BorderLayout.SOUTH, LeftSouth);
+        
+        //Action
+        ActionHandeler Action = new ActionHandeler();
+        menu_button_1.addActionListener((ActionListener) Action);
+        menu_button_2.addActionListener((ActionListener) Action);
+
         
         //frame declaration
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
