@@ -3,20 +3,21 @@ package View;
 
 import Model.FileOperations;
 import Model.InvoiceHeader;
+import Model.InvoiceLine;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 public class GUI {
     public void Main_Frame(){
         InvoiceHeader IH = new InvoiceHeader();
         FileOperations FO = new FileOperations();
         FO.readFile();
-        
-        String HeaderColumn[]={"NO.","DATE","NAME","TOTAL"};
-        String HeaderData[][]={ {"kk","OJ","670000","670000"},{"102","Jai","780000","670000"},{"101","Sachin","700000","670000"}};                           
-        String LineColumn[]={"NO.","ITEM NAME","ITEM PRICE","COUNT","ITEM TOTAL"};  
-        String LineData[][]={ {"101","Amit","670000","Amit","670000"},{"102","Jai","780000","Amit","670000"},{"101","Sachin","700000","Amit","670000"}};                           
-          
+        ArrayList<InvoiceHeader> IHL = new ArrayList<InvoiceHeader>();
+        ArrayList<InvoiceLine> ILL = new ArrayList<InvoiceLine>();
+
+
         //Creating Objects
         JFrame frame = new JFrame("Sales Invoice Generator");
         JPanel panel = new JPanel();
@@ -65,17 +66,26 @@ public class GUI {
         //Button declaration and initialaization
         JButton creat = new JButton("Create New Invoice");
         JButton delete = new JButton("Delet Invoice");       
-        JButton save = new JButton("Save");
-        JButton cancel = new JButton("Cancel");
+        JButton save = new JButton("Add New Item");
+        JButton cancel = new JButton("Delet Item");
         
         //Table initialaization
-        HeaderTable = new JTable(HeaderData, HeaderColumn);
-        LineTable = new JTable(LineData, LineColumn);
+        HeaderTable.setModel(new DefaultTableModel(
+                new Object[][] {},
+                new String[] {"NO.","DATE","NAME","TOTAL"}));
+        LineTable.setModel(new DefaultTableModel(
+                new Object[][] {},              
+                new String[] {"NO.","ITEM NAME","ITEM PRICE","COUNT","ITEM TOTAL"}));
         JScrollPane LeftTable = new JScrollPane(HeaderTable);
         JScrollPane RightTable = new JScrollPane(LineTable);
         HeaderTable.setFillsViewportHeight(true);
         LineTable.setFillsViewportHeight(true);
-
+        
+        //Load Last state
+        DefaultTableModel IHModel = (DefaultTableModel) HeaderTable.getModel();
+        DefaultTableModel ILModel = (DefaultTableModel) LineTable.getModel();
+        
+        
         //Main panel declaration and initialization
         panel.setLayout(new GridLayout(1,2));
         panel.add(LeftPanel);
