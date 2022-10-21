@@ -1,12 +1,21 @@
 
 package Model;
 
+import java.util.ArrayList;
+
 public class InvoiceHeader {
     private int InvoiceNumber;
     private String InvoiceDate;
     private String CustomerName;
     private double Total;
+    private final ArrayList<InvoiceLine> invoiceLines;
 
+    public InvoiceHeader(int num,String date,String name) {
+        this.InvoiceNumber = num;
+        this.InvoiceDate = date;
+        this.CustomerName = name;
+        this.invoiceLines = new ArrayList<>();
+    }
     public int getInvoiceNumber() {
         return InvoiceNumber;
     }
@@ -30,5 +39,21 @@ public class InvoiceHeader {
     }
     public void setTotal(double Total) {
         this.Total = Total;
+    }
+    public ArrayList<InvoiceLine> getInvoiceLines() {
+        return this.invoiceLines;
+    }
+
+    public void addInvoiceLine(InvoiceLine invoiceLine)
+    {
+        this.invoiceLines.add(invoiceLine);
+    }
+
+    public void deleteItem(int index) {
+        this.invoiceLines.remove(index);
+    }
+
+    public void updateItem(int itemIndex,String name,double price, int count) {
+        this.invoiceLines.get(itemIndex).updateItem(name,price,count);
     }
 }

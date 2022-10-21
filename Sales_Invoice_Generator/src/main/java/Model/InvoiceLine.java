@@ -7,7 +7,15 @@ public class InvoiceLine {
     private double ItemPrice;
     private int Quantity;
     private double Total;
+    private InvoiceHeader header;
 
+    
+    public InvoiceLine(String name,double price,int count,InvoiceHeader header){
+        this.ItemName = name;
+        this.ItemPrice = price;
+        this.Quantity = count;
+        this.header = header;
+    }
     public int getInvoiceNumber() {
         return InvoiceNumber;
     }
@@ -37,5 +45,10 @@ public class InvoiceLine {
     }
     public void setTotal(double Total) {
         this.Total = Quantity*ItemPrice;
+    }
+    public void updateItem(String name,double price, int count) {
+        this.Quantity = count;
+        this.ItemPrice = price;
+        this.ItemName = name;
     }
 }

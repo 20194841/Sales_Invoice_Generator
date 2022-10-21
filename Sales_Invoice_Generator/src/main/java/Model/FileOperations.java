@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileSystemView;
@@ -14,6 +15,7 @@ import javax.swing.filechooser.FileSystemView;
 public class FileOperations {
     public static ArrayList<InvoiceHeader> readFile(){
         ArrayList<InvoiceHeader> InvoiceHeaderList = new ArrayList<InvoiceHeader>();
+
         String Line = "";  
         String HeaderPath ="";
         String LinePath ="";
@@ -34,22 +36,18 @@ public class FileOperations {
         else
                LinePath = "Operation Canceled";
         
- System.out.println(HeaderPath);
-  System.out.print(LinePath);
-
         BufferedReader BF = new BufferedReader(new FileReader(HeaderPath));  
-        InvoiceHeader IH = new InvoiceHeader();
+       // InvoiceHeader IH = new InvoiceHeader(Data[0], Data[1], Data[2]);
         while ((Line = BF.readLine()) != null){         
             String[] Data = Line.split(",");    // use comma as separator  
-            IH.setInvoiceNumber(Integer.parseInt(Data[0]));
-            IH.setInvoiceDate(Data[1]);
-            IH.setCustomerName(Data[2]);
-            InvoiceHeaderList.add(IH);      
-           }  
+           InvoiceHeaderList.add(new InvoiceHeader(Integer.parseInt(Data[0]), Data[1], Data[2]));
+           }        
         }   
        catch (IOException X){  
             X.printStackTrace();  
         } 
+        
+         
         return InvoiceHeaderList;
     }
     

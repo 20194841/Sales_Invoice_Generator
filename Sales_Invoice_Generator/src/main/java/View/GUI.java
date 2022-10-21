@@ -9,14 +9,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 
 public class GUI {
+    private static final String[] InvoicesTableHeader = new String[]{"No.","Date","Customer","Total"};
+    //private static final String[] itemsTableHeader = new String[]{"No.","Item Name","Item Price","Count","Item Total"};
+    //private static DefaultTableModel itemsTableModel;
+    private static DefaultTableModel InvoicesTableModel;
     public void Main_Frame(){
-        InvoiceHeader IH = new InvoiceHeader();
-        ArrayList<InvoiceHeader> IHL = new ArrayList<InvoiceHeader>();
+       // InvoiceHeader IH = new InvoiceHeader(Data[0], Data[1], Data[2]);
         ArrayList<InvoiceLine> ILL = new ArrayList<InvoiceLine>();
+        
+ InvoicesTableModel = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
+        };
 
+        InvoicesTableModel.setColumnIdentifiers(InvoicesTableHeader);
 
         //Creating Objects
         JFrame frame = new JFrame("Sales Invoice Generator");
@@ -28,7 +41,7 @@ public class GUI {
         JPanel RightSouth = new JPanel();
         JPanel LeftCenter = new JPanel();
         JPanel LeftSouth = new JPanel();
-        JTable HeaderTable = new JTable();
+        JTable HeaderTable = new JTable(InvoicesTableModel);
         JTable LineTable = new JTable();
         JMenuBar menu = new JMenuBar();
         JToolBar toolbar = new JToolBar();
@@ -70,21 +83,21 @@ public class GUI {
         JButton cancel = new JButton("Delete Item");
         
         //Table initialaization
-        HeaderTable.setModel(new DefaultTableModel(
+       /* HeaderTable.setModel(new DefaultTableModel(
                 new Object[][] {},
-                new String[] {"NO.","DATE","NAME","TOTAL"}));
+                new String[]  {"NO.","DATE","NAME","TOTAL"}));
         LineTable.setModel(new DefaultTableModel(
                 new Object[][] {},              
-                new String[] {"NO.","ITEM NAME","ITEM PRICE","Quantity","ITEM TOTAL"}));
+                new String[] {"NO.","ITEM NAME","ITEM PRICE","Quantity","ITEM TOTAL"}));*/
         JScrollPane LeftTable = new JScrollPane(HeaderTable);
         JScrollPane RightTable = new JScrollPane(LineTable);
         HeaderTable.setFillsViewportHeight(true);
         LineTable.setFillsViewportHeight(true);
-        
+        /*
         //Load Last state
         DefaultTableModel IHModel = (DefaultTableModel) HeaderTable.getModel();
         DefaultTableModel ILModel = (DefaultTableModel) LineTable.getModel();
-        
+        */
         
         //Main panel declaration and initialization
         panel.setLayout(new GridLayout(1,2));
@@ -153,5 +166,20 @@ public class GUI {
         frame.getContentPane().add(panel);
         frame.setVisible(true); 
     }  
+    public static void updateInvoicesTable(int number,String Date, String name, double total , int Size) {
+  
+      Object rowData[] = new Object[4];
+        for(int i = 0; i < Size; i++)
+        {
+            rowData[0] = number;
+            rowData[1] = Date;
+            rowData[2] = name;
+            rowData[3] = total;          
+        }
+            InvoicesTableModel.addRow(rowData);
+        
+} 
+    
+
      
 }

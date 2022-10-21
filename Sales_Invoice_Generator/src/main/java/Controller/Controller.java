@@ -2,21 +2,34 @@
 package Controller;
 
 import Model.FileOperations;
+import Model.InvoiceHeader;
+import static View.GUI.updateInvoicesTable;
+import java.util.ArrayList;
+
 
 
 public class Controller {
     
+    
      void saveFile() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+               System.out.print("Save button pressed");
+
     }
 
     void LoadFile() {
         FileOperations FO = new FileOperations();
-        FO.readFile(); 
+              ArrayList<InvoiceHeader> list = FO.readFile();              
+       for(int i = 0; i < list.size(); i++)
+        {
+         updateInvoicesTable(list.get(i).getInvoiceNumber(),list.get(i).getInvoiceDate(),list.get(i).getCustomerName(),list.get(i).getTotal(),list.size());
+
+        }
+
     }
 
     void createNewInvoice() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       System.out.print("create button pressed");
+
     }
 
     void deleteInvoice() {
