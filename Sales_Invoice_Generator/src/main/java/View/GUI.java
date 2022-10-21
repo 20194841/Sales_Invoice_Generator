@@ -14,7 +14,6 @@ import javax.swing.table.DefaultTableModel;
 public class GUI {
     public void Main_Frame(){
         InvoiceHeader IH = new InvoiceHeader();
-        
         ArrayList<InvoiceHeader> IHL = new ArrayList<InvoiceHeader>();
         ArrayList<InvoiceLine> ILL = new ArrayList<InvoiceLine>();
 
@@ -76,7 +75,7 @@ public class GUI {
                 new String[] {"NO.","DATE","NAME","TOTAL"}));
         LineTable.setModel(new DefaultTableModel(
                 new Object[][] {},              
-                new String[] {"NO.","ITEM NAME","ITEM PRICE","COUNT","ITEM TOTAL"}));
+                new String[] {"NO.","ITEM NAME","ITEM PRICE","Quantity","ITEM TOTAL"}));
         JScrollPane LeftTable = new JScrollPane(HeaderTable);
         JScrollPane RightTable = new JScrollPane(LineTable);
         HeaderTable.setFillsViewportHeight(true);
@@ -142,8 +141,11 @@ public class GUI {
         ActionHandeler Action = new ActionHandeler();
         menu_button_1.addActionListener((ActionListener) Action);
         menu_button_2.addActionListener((ActionListener) Action);
+        creat.addActionListener((ActionListener) Action);
+        delete.addActionListener((ActionListener) Action);
+        save.addActionListener((ActionListener) Action);
+        cancel.addActionListener((ActionListener) Action);
 
-        
         //frame declaration
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 600);
@@ -151,4 +153,5 @@ public class GUI {
         frame.getContentPane().add(panel);
         frame.setVisible(true); 
     }  
+     
 }
