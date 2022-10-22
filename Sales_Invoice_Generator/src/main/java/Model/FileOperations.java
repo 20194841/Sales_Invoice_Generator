@@ -1,54 +1,141 @@
+package model;
 
-package Model;
-
-import java.io.BufferedReader;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Paths;
+import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileSystemView;
 
 public class FileOperations {
-    public static ArrayList<InvoiceHeader> readFile(){
-        ArrayList<InvoiceHeader> InvoiceHeaderList = new ArrayList<InvoiceHeader>();
+    private static String invoiceHeaderFilePath;
+    private static String invoiceLineFilePath;
+    public static ArrayList<InvoiceHeader> readFile() {
+        
+        //Read data from InvoiceHeader and InvoiceLine and put this data in InvoiceHeader array list
+        ArrayList<InvoiceHeader> invoices = new ArrayList<>();
+        readFromHeaderFile(invoices);
+        readFromLinesFile(invoices);
+        return invoices;
+    }
 
-        String Line = "";  
-        String HeaderPath ="";
-        String LinePath ="";
-        try   
-        {    
-        JFileChooser Chooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        JOptionPane.showMessageDialog(null,"Choose Header File first then choose the Invoice Line file");
-        //Get path of the Header file
-        int Press = Chooser.showSaveDialog(null);
-        if (Press == JFileChooser.APPROVE_OPTION)
-               HeaderPath = Chooser.getSelectedFile().getAbsolutePath();
-        else
-               HeaderPath = "Operation Canceled";
-        //Get path of the Line file
-        int Press2 = Chooser.showSaveDialog(null);
-        if (Press2 == JFileChooser.APPROVE_OPTION)
-               LinePath = Chooser.getSelectedFile().getAbsolutePath();
-        else
-               LinePath = "Operation Canceled";
-        
-        BufferedReader BF = new BufferedReader(new FileReader(HeaderPath));  
-       // InvoiceHeader IH = new InvoiceHeader(Data[0], Data[1], Data[2]);
-        while ((Line = BF.readLine()) != null){         
-            String[] Data = Line.split(",");    // use comma as separator  
-           InvoiceHeaderList.add(new InvoiceHeader(Integer.parseInt(Data[0]), Data[1], Data[2]));
-           }        
-        }   
-       catch (IOException X){  
-            X.printStackTrace();  
-        } 
-        
-         
-        return InvoiceHeaderList;
+    private static void readFromHeaderFile(ArrayList<InvoiceHeader> invoices) {
+        BufferedReader fileReader;
+        try { 
+            fileReader = new BufferedReader(new FileReader(invoiceHeaderFilePath)) ;
+            String line;
+            while ((line = fileReader.readLine()) != null) {
+                int invoiceNo;
+                String invoiceDate;
+                String name;
+                String[] headerFields = line.split(",");
+                    invoiceNo = Integer.parseInt(headerFields[0]);
+                    invoiceDate = headerFields[1];
+                    name = headerFields[2];
+                    invoices.add(new InvoiceHeader(invoiceNo, invoiceDate, name));
+            }
+            fileReader.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null,
+                    "ERROR"+invoiceHeaderFilePath,
+                    "Can't extract data from file",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private static void readFromLinesFile(ArrayList<InvoiceHeader> invoices) {
+        try { 
+            BufferedReader fileReader = new BufferedReader(new FileReader(invoiceLineFilePath)) ;
+            String line;
+            while ((line = fileReader.readLine()) != null) {
+                int invoiceNo;
+                String name;
+                double price;
+                int count;
+                String[] headerFields = line.split(",");
+                invoiceNo = Integer.parseInt(headerFields[0]);
+                name = headerFields[1];
+                price = Double.parseDouble(headerFields[2]);
+                count = Integer.parseInt(headerFields[3]);
+                for (InvoiceHeader invoice : invoices) {
+                    if (invoice.getInvoiceNum() == invoiceNo) {
+                        invoice.addInvoiceLine(new InvoiceLine(name,price,count,invoice)); 
+                        break;
+                    }
+                }
+            }
+            fileReader.close();
+        }catch (IOException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error"+invoiceLineFilePath,
+                    "Can't extract data from file",JOptionPane.ERROR_MESSAGE);
+        }
     }
     
+    public static void writeFile(ArrayList<InvoiceHeader> invoices) {
+        // Write invoices data to InvoiceHeader and InvoiceLine files
+        ArrayList<String> headersList = new ArrayList<>(); //this array list represents the file lines
+        ArrayList<String> linesList = new ArrayList<>(); //this array list represents the file lines
+        if (invoices == null || invoices.size() == 0) { //If there are no invoices to be written, show error message
+            int result = JOptionPane.showConfirmDialog(null,
+                    "Error",
+                    "Didn't find invoices to save", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.YES_OPTION) {
+                try {
+                    BufferedWriter headerFile = new BufferedWriter(new FileWriter(invoiceHeaderFilePath));
+                    headerFile.close();
+                    BufferedWriter itemsFile = new BufferedWriter(new FileWriter(invoiceLineFilePath));
+                    itemsFile.close();
+                } catch (Exception e) {
+                }
+            }
+            return;
+        }
+        for (InvoiceHeader selectedInvoice : invoices) { 
+            headersList.add(selectedInvoice.getInvoiceNum() + "," + selectedInvoice.getInvoiceDate() + "," + selectedInvoice.getCustomerName());
+            ArrayList<InvoiceLine> selectedLines = selectedInvoice.getInvoiceLines();
+            if (selectedLines != null && selectedLines.size() > 0) {
+                for (InvoiceLine selectedLine : selectedLines) {
+                    linesList.add(selectedInvoice.getInvoiceNum() + "," + selectedLine.getItemName() + "," + selectedLine.getItemPrice() + "," + selectedLine.getCount());
+                }
+            }
+        }
+
+        try{ 
+            BufferedWriter headerFile = new BufferedWriter(new FileWriter(invoiceHeaderFilePath));
+            if (headersList.size() > 0)
+            {
+                for (String s : headersList) {
+                    headerFile.write(s+"\n");
+                }
+            }
+            headerFile.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error"+invoiceHeaderFilePath,
+                    "Cannot save invoices to the file",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try{ 
+            BufferedWriter itemsFile = new BufferedWriter(new FileWriter(invoiceLineFilePath));
+            if (linesList.size() > 0)
+            {
+                for (String s : linesList) {
+                    itemsFile.write(s+"\n");
+                }
+            }
+            itemsFile.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error"+invoiceLineFilePath,
+                    "Cannot save items to the file",JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+    public static void setInvoiceHeaderFilePath(String filePath) {
+        invoiceHeaderFilePath = filePath;
+    }
+
+    public static void setInvoiceLineFilePath(String filePath) {
+        invoiceLineFilePath = filePath;
+    }
+
+
 }
