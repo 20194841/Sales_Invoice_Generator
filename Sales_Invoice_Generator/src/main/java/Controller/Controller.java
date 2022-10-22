@@ -3,6 +3,8 @@ package Controller;
 
 import Model.FileOperations;
 import Model.InvoiceHeader;
+import static View.GUI.AddRow;
+import static View.GUI.DeleteRow;
 import static View.GUI.updateInvoicesTable;
 import java.util.ArrayList;
 
@@ -28,16 +30,15 @@ public class Controller {
     }
 
     void createNewInvoice() {
-       System.out.print("create button pressed");
-
+              AddRow(); 
+             // LoadFile()
     }
 
     void deleteInvoice() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+              DeleteRow(0);   
     }
 
     void createNewItem() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     void deleteItem() {
