@@ -1,5 +1,5 @@
 
-package Controller;
+package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,32 +7,30 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 public class ActionHandeler implements ActionListener, ListSelectionListener {
-    Controller Action = new Controller();
     public void actionPerformed(ActionEvent e) {
+     Controller Action = new Controller();   
         switch(e.getActionCommand()){
-            case "Save":
-                Action.saveFile();
-                break;
-            case "Load":
+            case "Load File":
                 Action.LoadFile();
                 break;
+            case "Save File":
+                Action.SaveFile();
+                break;
             case "Create New Invoice":
-                Action.createNewInvoice();
+                Action.CreateNewInvoice();
                 break;
             case "Delete Invoice":
-                Action.deleteInvoice();
+                Action.DeleteInvoice();
                 break;
-            case "Add New Item":
+            case "Create Item":
+                Action.CreateItem();
                 break;
             case "Delete Item":
-                Action.deleteItem();
+                Action.DeleteItem();
                 break;
         }
     }
-
     @Override
     public void valueChanged(ListSelectionEvent e) {
-    }
-
-   
+    } 
 }
