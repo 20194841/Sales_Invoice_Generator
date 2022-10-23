@@ -8,6 +8,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import model.FileOperations;
 import model.LoadedInvoices;
 import view.GUI;
+import static view.GUI.AddRow;
 
 public class Controller {
 
@@ -81,7 +82,7 @@ public class Controller {
     }
 
     void CreateNewInvoice() {
-       System.out.println("Create new invoice");
+        AddRow();
     }
 
     void DeleteInvoice() {

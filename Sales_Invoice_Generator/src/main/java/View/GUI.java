@@ -149,6 +149,15 @@ public class GUI extends JFrame {
         this.setLayout(new GridLayout(1,2));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+    public static void AddRow() {
+      Object rowData[] = new Object[4];
+            rowData[0] = "";
+            rowData[1] = "";
+            rowData[2] = "";
+            rowData[3] = "";
+            InvoicesTableModel.addRow(rowData);
+
+} 
 
     public static void updateInvoicesTable(ArrayList<InvoiceHeader> invoices) {
         // Update the invoices table with the array list of invoices provided
@@ -177,6 +186,7 @@ public class GUI extends JFrame {
             InvoicesTableModel.fireTableDataChanged();
         }
     }
+
 
     public static void updateLineTableAndInvoiceForm(InvoiceHeader invoice) {
         if (invoice == null) 
