@@ -150,17 +150,7 @@ public class GUI extends JFrame {
         this.setLayout(new GridLayout(1,2));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    public static void AddRow() {
-        int x=3;
-        int number=x;
-        String date ="Enter Date";
-        String name ="Enter Name";
-        InvoiceHeader newInvoice = new InvoiceHeader(number,date,name);
-        LoadedInvoices.updateInvoice(newInvoice);
-        GUI.updateInvoicesTable(LoadedInvoices.getInvoices());
-        GUI.resetItemsTableAndInvoiceFormToDefault();
-        x++;   
-} 
+
 
     public static void updateInvoicesTable(ArrayList<InvoiceHeader> invoices) {
         // Update the invoices table with the array list of invoices provided

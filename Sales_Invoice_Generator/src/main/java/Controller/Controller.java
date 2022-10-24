@@ -6,11 +6,13 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import model.FileOperations;
+import model.InvoiceHeader;
 import model.LoadedInvoices;
 import view.GUI;
-import static view.GUI.AddRow;
 
 public class Controller {
+    private int x=3;
+
 
     void LoadFile() {
             int result;  
@@ -82,7 +84,14 @@ public class Controller {
     }
 
     void CreateNewInvoice() {
-        AddRow();
+        int number=x;
+        String date ="Enter Date";
+        String name ="Enter Name";
+        InvoiceHeader newInvoice = new InvoiceHeader(number,date,name);
+        LoadedInvoices.updateInvoice(newInvoice);
+        GUI.updateInvoicesTable(LoadedInvoices.getInvoices());
+        GUI.resetItemsTableAndInvoiceFormToDefault();
+        x++;   
     }
 
     void DeleteInvoice() {
