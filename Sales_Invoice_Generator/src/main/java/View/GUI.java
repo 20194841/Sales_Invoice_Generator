@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import model.LoadedInvoices;
 
 public class GUI extends JFrame {
 
@@ -150,13 +151,15 @@ public class GUI extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     public static void AddRow() {
-      Object rowData[] = new Object[4];
-            rowData[0] = "";
-            rowData[1] = "";
-            rowData[2] = "";
-            rowData[3] = "";
-            InvoicesTableModel.addRow(rowData);
-
+        int x=3;
+        int number=x;
+        String date ="Enter Date";
+        String name ="Enter Name";
+        InvoiceHeader newInvoice = new InvoiceHeader(number,date,name);
+        LoadedInvoices.updateInvoice(newInvoice);
+        GUI.updateInvoicesTable(LoadedInvoices.getInvoices());
+        GUI.resetItemsTableAndInvoiceFormToDefault();
+        x++;   
 } 
 
     public static void updateInvoicesTable(ArrayList<InvoiceHeader> invoices) {

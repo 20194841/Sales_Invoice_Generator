@@ -17,6 +17,12 @@ public class FileOperations {
     }
 
     private static void readFromHeaderFile(ArrayList<InvoiceHeader> invoices) {
+        if(!(invoiceHeaderFilePath.endsWith(".csv")||invoiceHeaderFilePath.endsWith(".CSV"))) {
+            JOptionPane.showMessageDialog(null,
+                    "The file provided is not csv file",
+                    "Wrong file format",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         BufferedReader fileReader;
         try { 
             fileReader = new BufferedReader(new FileReader(invoiceHeaderFilePath)) ;
@@ -27,19 +33,49 @@ public class FileOperations {
                 String name;
                 String[] headerFields = line.split(",");
                     invoiceNo = Integer.parseInt(headerFields[0]);
+                    try { //Validate the invoice date is DD/MM/YYYY
                     invoiceDate = headerFields[1];
+                    String[] dateFields = invoiceDate.split("/");
+                    int day = Integer.parseInt(dateFields[0]);
+                    int month = Integer.parseInt(dateFields[1]);
+                    Integer.parseInt(dateFields[2]);
+                    if (month < 1 || month > 12) {
+                        throw new Exception();
+                    }
+                    if (day < 1 || day > 31) {
+                        throw new Exception();
+                    }
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null,
+                            "The application can't extract the following date\r\n" + line,
+                            "Can't extract invoice date", JOptionPane.ERROR_MESSAGE);
+                    continue;
+                }
                     name = headerFields[2];
                     invoices.add(new InvoiceHeader(invoiceNo, invoiceDate, name));
             }
-            fileReader.close();
+           fileReader.close();
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null,
+                    "The file provided is not found\r\n"+invoiceHeaderFilePath,
+                    "File not found",JOptionPane.ERROR_MESSAGE);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null,
-                    "ERROR"+invoiceHeaderFilePath,
+                    "The application can't extract data from the following file\r\n"+invoiceHeaderFilePath,
                     "Can't extract data from file",JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private static void readFromLinesFile(ArrayList<InvoiceHeader> invoices) {
+        if(!(invoiceLineFilePath.endsWith(".csv")||invoiceLineFilePath.endsWith(".CSV")))
+        {
+            //If the file is not with extension .csv, show error message then stop reading
+            JOptionPane.showMessageDialog(null,
+                    "The file provided is not csv file",
+                    "Wrong file format",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         try { 
             BufferedReader fileReader = new BufferedReader(new FileReader(invoiceLineFilePath)) ;
             String line;
@@ -61,9 +97,13 @@ public class FileOperations {
                 }
             }
             fileReader.close();
-        }catch (IOException e) {
+        } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null,
-                    "Error"+invoiceLineFilePath,
+                    "The file provided is not found\r\n"+invoiceHeaderFilePath,
+                    "File not found",JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null,
+                    "The application can't extract data from the following file\r\n"+invoiceHeaderFilePath,
                     "Can't extract data from file",JOptionPane.ERROR_MESSAGE);
         }
     }
