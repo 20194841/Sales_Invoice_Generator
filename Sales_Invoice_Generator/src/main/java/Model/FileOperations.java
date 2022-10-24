@@ -15,7 +15,6 @@ public class FileOperations {
         readFromLinesFile(invoices);
         return invoices;
     }
-
     private static void readFromHeaderFile(ArrayList<InvoiceHeader> invoices) {
         if(!(invoiceHeaderFilePath.endsWith(".csv")||invoiceHeaderFilePath.endsWith(".CSV"))) {
             JOptionPane.showMessageDialog(null,
@@ -66,7 +65,6 @@ public class FileOperations {
                     "Can't extract data from file",JOptionPane.ERROR_MESSAGE);
         }
     }
-
     private static void readFromLinesFile(ArrayList<InvoiceHeader> invoices) {
         if(!(invoiceLineFilePath.endsWith(".csv")||invoiceLineFilePath.endsWith(".CSV")))
         {
@@ -176,6 +174,4 @@ public class FileOperations {
     public static void setInvoiceLineFilePath(String filePath) {
         invoiceLineFilePath = filePath;
     }
-
-
 }

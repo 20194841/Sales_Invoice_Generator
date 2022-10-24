@@ -1,5 +1,4 @@
 package controller;
-
 import view.GUI;
 
 public class Main {

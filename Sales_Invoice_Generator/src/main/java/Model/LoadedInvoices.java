@@ -7,11 +7,9 @@ public class LoadedInvoices {
     public static ArrayList<InvoiceHeader> getInvoices() {
         return invoices;
     }
-
     public static void setInvoices(ArrayList<InvoiceHeader> invoices) {
         LoadedInvoices.invoices = invoices;
     }
-
     public static void deleteInvoice(int invoiceNum) {
         for(int index = 0 ; index < invoices.size() ; index++) {
             if(invoices.get(index).getInvoiceNum() == invoiceNum){
@@ -29,7 +27,6 @@ public class LoadedInvoices {
         }
         invoices.add(newInvoice);
     }
-
     public static InvoiceHeader getInvoiceByInvoiceNumber(int invoiceNumber) {
         for (InvoiceHeader invoice : invoices) {
             if (invoiceNumber == invoice.getInvoiceNum()) {

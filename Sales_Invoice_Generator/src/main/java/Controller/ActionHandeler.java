@@ -7,6 +7,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 public class ActionHandeler implements ActionListener, ListSelectionListener {
+    
     public void actionPerformed(ActionEvent e) {
      Controller Action = new Controller();   
         switch(e.getActionCommand()){
@@ -32,5 +33,6 @@ public class ActionHandeler implements ActionListener, ListSelectionListener {
     }
     @Override
     public void valueChanged(ListSelectionEvent e) {
+        
     } 
 }

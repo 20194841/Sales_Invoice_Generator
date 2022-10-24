@@ -12,19 +12,15 @@ public class InvoiceLine {
         this.count = count;
         this.header = header;
     }
-
     public String getItemName() {
         return this.itemName;
     }
-
     public double getItemPrice() {
         return this.itemPrice;
     }
-
     public int getCount() {
         return this.count;
     }
-
     public void updateItem(String name,double price, int count) {
         this.count = count;
         this.itemPrice = price;

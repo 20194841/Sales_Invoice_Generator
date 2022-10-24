@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import model.LoadedInvoices;
 
 public class GUI extends JFrame {
-
      // txt field declaration
     private static JTextField invoiceNumber;
     private static JTextField invoiceDate;

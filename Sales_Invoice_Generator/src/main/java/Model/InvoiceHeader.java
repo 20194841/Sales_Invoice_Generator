@@ -8,7 +8,6 @@ public class InvoiceHeader {
     private String invoiceDate;
     private String customerName;
     private final ArrayList<InvoiceLine> invoiceLines;
-
     public InvoiceHeader(int num,String date,String name) {
         this.invoiceNum = num;
         this.invoiceDate = date;
@@ -16,7 +15,7 @@ public class InvoiceHeader {
         this.invoiceLines = new ArrayList<>();
     }
 
-    public int getInvoiceNum() {
+   public int getInvoiceNum() {
         return this.invoiceNum;
     }
 

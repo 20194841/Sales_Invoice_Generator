@@ -13,7 +13,6 @@ import view.GUI;
 public class Controller {
     private int x=3;
 
-
     void LoadFile() {
             int result;  
             result = JOptionPane.YES_OPTION;
