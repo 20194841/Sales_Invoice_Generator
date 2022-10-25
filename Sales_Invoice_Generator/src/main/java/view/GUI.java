@@ -47,7 +47,16 @@ public class GUI extends JFrame {
         this.setJMenuBar(menuBar);
 
         // table model
-        InvoicesTableModel = new DefaultTableModel() {};
+         // Invoice items table Declaration
+         InvoicesTableModel = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
+        };
+         
+        //InvoicesTableModel = new DefaultTableModel() {};
         InvoicesTableModel.setColumnIdentifiers(InvoicesTableHeader);
 
         invoicesTable = new JTable(InvoicesTableModel);
@@ -103,7 +112,6 @@ public class GUI extends JFrame {
         invoiceFormPanel.add(invoiceTotal);
 
 
-        // Invoice items table Declaration
         LineTableModel = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {

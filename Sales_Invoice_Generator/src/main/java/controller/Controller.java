@@ -11,12 +11,12 @@ import model.LoadedInvoices;
 import view.GUI;
 
 public class Controller {
-    private int x=3;
-
     void LoadFile() {
+        JOptionPane.showMessageDialog(null,
+                    "Please choose the Header File firstly then choose the Line File\r\n",
+                    "Important Information", JOptionPane.WARNING_MESSAGE);
             int result;  
             result = JOptionPane.YES_OPTION;
-
             if(result == JOptionPane.YES_OPTION){
                 String path = "";
                 FileOperations.setInvoiceLineFilePath("");
@@ -82,15 +82,32 @@ public class Controller {
             
     }
 
-    void CreateNewInvoice() {
+    void CreateNewInvoice(int x) {
+        String name = JOptionPane.showInputDialog("Please enter the Name");
+        String date = JOptionPane.showInputDialog("Please enter the Date");
+        try { 
+            String[] dateFields = date.split("/");
+            int day = Integer.parseInt(dateFields[0]);
+            int month = Integer.parseInt(dateFields[1]);
+            Integer.parseInt(dateFields[2]);
+            if (month < 1 || month > 12) {
+                throw new Exception();
+            }
+            if (day < 1 || day > 31) {
+                throw new Exception();
+            }
+        } catch (Exception exp) {
+            JOptionPane.showMessageDialog(null,
+                    "The application can't extract the following date, please use DD-MM-YYYY format\r\n" + date,
+                    "Can't extract invoice date", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        x++;
         int number=x;
-        String date ="Enter Date";
-        String name ="Enter Name";
         InvoiceHeader newInvoice = new InvoiceHeader(number,date,name);
         LoadedInvoices.updateInvoice(newInvoice);
         GUI.updateInvoicesTable(LoadedInvoices.getInvoices());
         GUI.resetItemsTableAndInvoiceFormToDefault();
-        x++;   
     }
 
     void DeleteInvoice() {

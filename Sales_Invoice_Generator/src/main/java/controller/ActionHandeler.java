@@ -7,7 +7,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 public class ActionHandeler implements ActionListener, ListSelectionListener {
-    
+    private int x = 1 ;
     public void actionPerformed(ActionEvent e) {
      Controller Action = new Controller();   
         switch(e.getActionCommand()){
@@ -18,7 +18,8 @@ public class ActionHandeler implements ActionListener, ListSelectionListener {
                 Action.SaveFile();
                 break;
             case "Create New Invoice":
-                Action.CreateNewInvoice();
+                x++;
+                Action.CreateNewInvoice(x);
                 break;
             case "Delete Invoice":
                 Action.DeleteInvoice();

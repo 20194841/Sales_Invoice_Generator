@@ -111,8 +111,8 @@ public class FileOperations {
         ArrayList<String> headersList = new ArrayList<>(); //this array list represents the file lines
         ArrayList<String> linesList = new ArrayList<>(); //this array list represents the file lines
         if (invoices == null || invoices.size() == 0) { //If there are no invoices to be written, show error message
-            int result = JOptionPane.showConfirmDialog(null,
-                    "Error",
+             int result = JOptionPane.showConfirmDialog(null,
+                    "No invoices found to save to the file, Do you want to continue with creating empty files ?",
                     "Didn't find invoices to save", JOptionPane.YES_NO_OPTION);
             if (result == JOptionPane.YES_OPTION) {
                 try {
@@ -145,9 +145,9 @@ public class FileOperations {
             }
             headerFile.close();
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null,
-                    "Error"+invoiceHeaderFilePath,
-                    "Cannot save invoices to the file",JOptionPane.ERROR_MESSAGE);
+           JOptionPane.showMessageDialog(null,
+                    "Cannot write to the following file, \r\n"+invoiceLineFilePath,
+                    "Cannot save items to the file",JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -162,7 +162,7 @@ public class FileOperations {
             itemsFile.close();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null,
-                    "Error"+invoiceLineFilePath,
+                    "Cannot write to the following file, \r\n"+invoiceLineFilePath,
                     "Cannot save items to the file",JOptionPane.ERROR_MESSAGE);
         }
 
