@@ -8,7 +8,7 @@ import java.awt.event.*;
 public class MouseClick extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(e.getClickCount() >= 2) 
+        if(e.getClickCount() >= 1) 
         {
             JTable target = (JTable)e.getSource();
             int invoiceNumber = Integer.parseInt((String)target.getValueAt(target.getSelectedRow(),0));
